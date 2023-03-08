@@ -1,38 +1,41 @@
 #include "main.h"
 
-/**
- * is_prime_helper - checks for prime numbers recursively
- * @n: The integer to be checked
- * @i: The other int to be checked
- *
- * Return: Returns the function
- */
+int divis(int i, int j);
 
-int is_prime_helper(int n, int i)
+/**
+ * divis - Checks if a number is divisible.
+ * @i: The number to be checked.
+ * @j: The divisor.
+ *
+ * Return: 0 if the number is divisible and 1 when otherwise.
+ */
+int divis(int i, int j)
 {
-	if (i == 1)
-	{
-		return (1);
-	}
-	if (n % 1 == 0)
-	{
+	if (i % j == 0)
 		return (0);
-	}
-	return (is_prime_helper(n, i - 1));
+
+	if (j == i / 2)
+		return (1);
+
+	return (divis(i, j + 1));
 }
 
 /**
- * is_prime_number - Checks for prime number
- * @n: the integer to be checked
+ * is_prime_number - Checks if a number is prime.
+ * @n: The number to be checked.
  *
- * Return: 1 for prime numbers 0 if otherwise
+ * Return: 0 if @n is not prime.
+ *         1 if @n is prime.
  */
 int is_prime_number(int n)
 {
-	if (n <= 1)
-	{
-		return (0);
-	}
-	return (is_prime_helper(n, n - 1));
-}
+	int j = 2;
 
+	if (n <= 1)
+		return (0);
+
+	if (n >= 2 && n <= 3)
+		return (1);
+
+	return (divis(n, j));
+}
